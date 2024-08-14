@@ -163,7 +163,7 @@ Scissor is a URL shortening service built with the NestJS framework and MongoDB.
 Create a `.env` file in the root directory and add the following variables:
 
 ```plaintext
-MONGO_URI=mongodb://localhost:27017/scissor
+DB_URI=mongodb://localhost:27017/scissor
 JWT_SECRET=yourjwtsecret
 JWT_EXPIRES=token-expiry-time
 
