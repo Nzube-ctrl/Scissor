@@ -55,7 +55,7 @@ Scissor is a URL shortening service built with the NestJS framework and MongoDB.
 - **Backend**: NestJS, Node.js, Express.js, MongoDB, Mongoose
 - **Frontend**: HTML, CSS, JavaScript
 - **Authentication**: JWT
-- **Other Tools**: memory cache (for caching), QRCode (for generating QR codes), Render (for deployment)
+- **Other Tools**: memory cache (for caching), QRCode (for generating QR codes).
 
 ## Getting Started
 
@@ -91,7 +91,7 @@ Scissor is a URL shortening service built with the NestJS framework and MongoDB.
     npm run start
     ```
 
-4. Open `frontend/home.html` in a web browser to use the frontend interface.
+4. Open `public/index.html` in a web browser to use the frontend interface.
 
 ## API Endpoints
 
@@ -104,6 +104,7 @@ Scissor is a URL shortening service built with the NestJS framework and MongoDB.
     - **Body Parameters**:
         ```json
         {
+          "username": "yourUsername",
           "email": "youremail@example.com",
           "password": "yourpassword"
         }
@@ -124,7 +125,7 @@ Scissor is a URL shortening service built with the NestJS framework and MongoDB.
 ### URL Shortening
 
 - **Shorten URL**
-    - **Endpoint**: `/urls/shorten`
+    - **Endpoint**: `/url/shorten`
     - **Method**: POST
     - **Description**: Shorten a long URL.
     - **Headers**: `Authorization: Bearer <token>`
@@ -132,19 +133,18 @@ Scissor is a URL shortening service built with the NestJS framework and MongoDB.
         ```json
         {
           "originalUrl": "https://www.example.com",
-          "customShortUrl": "custom123",
-          "generateQr": true
+          "customShortUrl": "custom123", //Optional
         }
         ```
 
-- **Get URL History**
-    - **Endpoint**: `/urls/:userId/history`
+- **Get Link History**
+    - **Endpoint**: `/url/user/:userId`
     - **Method**: GET
     - **Description**: Get the history of shortened URLs for a user.
     - **Headers**: `Authorization: Bearer <token>`
  
 - **Get URL Analytics**
-    - **Endpoint**: `/urls/shortenedurl/analytics`
+    - **Endpoint**: `/url/analytics`
     - **Method**: GET
     - **Description**: Get the analytics(number of clicks and sources) of shortened URLs for a user.
     - **Headers**: `Authorization: Bearer <token>
@@ -165,15 +165,15 @@ Create a `.env` file in the root directory and add the following variables:
 ```plaintext
 MONGO_URI=mongodb://localhost:27017/scissor
 JWT_SECRET=yourjwtsecret
-BASE_URL=https://scissor-t2n9.onrender.com/urls/
+JWT_EXPIRES=token-expiry-time
 
 
 Deployment
-The project can be deployed using various platforms. Here, we'll use Render:
+The project can be deployed using various platforms.
 
-- Create a new web service on Render.
+- Create a new web service on prefered hosting platform.
 - Connect your GitHub repository.
-- Set up the environment variables on Render.
+- Set up the environment variables.
 - Deploy the service.
 
 
