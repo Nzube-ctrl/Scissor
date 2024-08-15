@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Scissor registration page" />
+    <title>Scissor.</title>
+    <style>
+      /* Reset default browser styles */
+      body,
+      h1,
+      p,
+      label,
+      input,
+      button,
+      footer {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+        color: #007bff;
+      }
+
+      form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+        text-align: left;
+      }
+
+      input[type='text'],
+      input[type='email'],
+      input[type='password'] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 15px;
+      }
+
+      button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      p {
+        margin-top: 15px;
+        color: #333;
+      }
+
+      p a {
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      p a:hover {
+        text-decoration: underline;
+      }
+
+      footer {
+        margin-top: 20px;
+        text-align: center;
+        color: #333;
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        form {
+          padding: 15px;
+        }
+
+        input[type='text'],
+        input[type='email'],
+        input[type='password'] {
+          width: calc(100% - 20px);
+          padding: 8px;
+        }
+
+        button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Scissor.</h1>
+    <p>Sign up to the Scissor platform.</p>
+    <form id="registerForm" method="POST">
+      <label for="username">Username:</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        required
+        placeholder="Enter your username"
+      />
+
+      <label for="emailAddress">Email Address:</label>
+      <input
+        type="email"
+        id="email"
+        name="emailAddress"
+        required
+        placeholder="Enter your email"
+      />
+
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+        placeholder="Enter your password"
+      />
+
+      <button type="submit">Submit</button>
+    </form>
+    <p>Already have an account? <a href="login.html">Login</a></p>
+    <footer>
+      <p>&copy; 2024. Scissor. All Rights Reserved.</p>
+    </footer>
+    <script>
+      document
+        .getElementById('registerForm')
+        .addEventListener('submit', async function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(this);
+          const username = formData.get('username');
+          const email = formData.get('emailAddress');
+          const password = formData.get('password');
+
+          try {
+            const response = await fetch(
+              'http://localhost:5000/auth/register',
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, email, password }),
+              },
+            );
+
+            if (response.ok) {
+              const data = await response.json();
+
+              // Store the token in local storage
+              localStorage.setItem('authToken', data.token);
+
+              // Optionally, store user details if needed
+              localStorage.setItem('user', JSON.stringify(data.user));
+
+              // Show success message
+              const successMessage = document.getElementById('successMessage');
+              successMessage.classList.remove('hidden');
+
+              // Hide message and redirect after 3 seconds
+              setTimeout(() => {
+                successMessage.classList.add('hidden');
+                window.location.href = '/index.html'; // Redirect to the home page
+              }, 3000);
+            } else {
+              const errorData = await response.json();
+              console.error('Registration failed:', errorData.message);
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        });
+    </script>
+  </body>
+</html>
