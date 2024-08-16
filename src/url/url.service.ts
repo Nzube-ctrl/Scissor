@@ -56,7 +56,7 @@ export class UrlService {
     await url.save();
     return shortUrl;
   }
-  
+
 
   async getOriginalUrl(shortUrl: string): Promise<string> {
     const urlRecord = await this.urlModel.findOne({ shortUrl });
