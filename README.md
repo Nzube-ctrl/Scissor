@@ -122,6 +122,32 @@ Scissor is a URL shortening service built with the NestJS framework and MongoDB.
         }
         ```
 
+        - **update user details**
+    - **Endpoint**: `/users/:userId`
+    - **Method**: PUT
+    - **Description**: Update details of an existing user.
+    - **Body Parameters**:
+        ```json
+        {
+          "email": "updatedemail@example.com",
+          "username": "updatedUsername"
+        }
+        ```
+
+        - **Delete Profile**
+    - **Endpoint**: `/users/:userId`
+    - **Method**: DELETE
+    - **Description**: Delete an existing user.
+    - **Body Parameters**:
+        ```json
+        {
+          "email": "youremail@example.com",
+          "password": "yourpassword"
+        }
+        ```
+
+        
+
 ### URL Shortening
 
 - **Shorten URL**
@@ -137,6 +163,31 @@ Scissor is a URL shortening service built with the NestJS framework and MongoDB.
         }
         ```
 
+        - **Customize short URL**
+    - **Endpoint**: `/url/customize-short-url`
+    - **Method**: POST
+    - **Description**: Shorten a long URL.
+    - **Headers**: `Authorization: Bearer <token>`
+    - **Body Parameters**:
+        ```json
+        {
+          "shortUrl": "shortUrl",
+          "customShortUrl": "custom123", 
+        }
+        ```
+
+        - **Generate QrCode**
+    - **Endpoint**: `/url/generate-qr-code`
+    - **Method**: POST
+    - **Description**: Generate QrCode for shortened Url.
+    - **Headers**: `Authorization: Bearer <token>`
+    - **Body Parameters**:
+        ```json
+        {
+           "shortUrl": "shortenedUrl"
+        }
+        ```
+
 - **Get Link History**
     - **Endpoint**: `/url/user/:userId`
     - **Method**: GET
@@ -144,7 +195,7 @@ Scissor is a URL shortening service built with the NestJS framework and MongoDB.
     - **Headers**: `Authorization: Bearer <token>`
  
 - **Get URL Analytics**
-    - **Endpoint**: `/url/analytics`
+    - **Endpoint**: `/url/:linkId`
     - **Method**: GET
     - **Description**: Get the analytics(number of clicks and sources) of shortened URLs for a user.
     - **Headers**: `Authorization: Bearer <token>
