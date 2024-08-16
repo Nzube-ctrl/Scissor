@@ -30,11 +30,10 @@
     - [Installation](#installation)
     - [Running the Application](#running-the-application)
 5. [API Endpoints](#api-endpoints)
-6. [Frontend Usage](#frontend-usage)
-7. [Environment Variables](#environment-variables)
-8. [Deployment](#deployment)
-9. [Testing](#testing)
-10. [Troubleshooting](#troubleshooting)
+6. [Environment Variables](#environment-variables)
+7. [Deployment](#deployment)
+8. [Testing](#testing)
+9. [Troubleshooting](#troubleshooting)
 
 
 ## Introduction
@@ -200,14 +199,6 @@ Scissor is a URL shortening service built with the NestJS framework and MongoDB.
     - **Description**: Get the analytics(number of clicks and sources) of shortened URLs for a user.
     - **Headers**: `Authorization: Bearer <token>
 
-## Frontend Usage
-
-1. Open `frontend/home.html` in a web browser.
-2. Enter the original URL you want to shorten.
-3. (Optional) Enter a custom alias for the shortened URL.
-4. (Optional) Check the "Generate QR Code" checkbox.
-5. Click the "Shorten link" button.
-6. The shortened URL and QR code (if generated) will be displayed.
 
 ## Environment Variables
 
