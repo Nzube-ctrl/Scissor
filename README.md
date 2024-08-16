@@ -166,7 +166,7 @@ Scissor is a URL shortening service built with the NestJS framework and MongoDB.
         - **Customize short URL**
     - **Endpoint**: `/url/customize-short-url`
     - **Method**: POST
-    - **Description**: Shorten a long URL.
+    - **Description**: Customize  a short URL.
     - **Headers**: `Authorization: Bearer <token>`
     - **Body Parameters**:
         ```json
