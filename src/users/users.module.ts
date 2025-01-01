@@ -5,6 +5,7 @@ import { UserSchema } from 'src/schemas/user.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/auth/auth.module';
 import { User, UserDocument } from 'src/schemas/user.schema';
+import { JwtService } from '@nestjs/jwt';
 
 
 @Module({

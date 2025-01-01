@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import helmet from 'helmet';
 import { join } from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { ValidationPipe } from '@nestjs/common';
 
 
 async function bootstrap() {
@@ -12,6 +13,7 @@ async function bootstrap() {
   await app.listen(PORT);
   app.use(helmet());
   app.enableCors();
+  app.useGlobalPipes(new ValidationPipe());
   // app.useStaticAssets(join(__dirname, '..', 'public'));
 }
 bootstrap();

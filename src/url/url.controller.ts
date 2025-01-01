@@ -15,14 +15,14 @@ import { UrlService } from './url.service';
 import { ShortenUrlDto } from './dto/shorten.url.dto';
 import { GenerateQrCodeDto } from './dto/generate.qrcode.dto';
 import { CustomizeShortUrlDto } from './dto/customize.dto';
-import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
 import { Url } from 'src/schemas/url.schema';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
+@UseGuards(AuthenticationGuard)
 @Controller('url')
 export class UrlController {
   constructor(private readonly urlService: UrlService) { }
 
-  @UseGuards(JwtAuthGuard)
   @Post('shorten')
   async shortenUrl(@Body(ValidationPipe) shortenUrlDto: ShortenUrlDto, @Req() request: any): Promise<string> {
     // return this.urlService.shortenUrl(shortenUrlDto, request);
@@ -32,7 +32,6 @@ export class UrlController {
     return redirectLink;
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get(':shortUrl')
   @Redirect()
   async redirect(@Param('shortUrl') shortUrl: string) {
@@ -44,7 +43,6 @@ export class UrlController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
   @Post('generate-qrCode')
   async generateQrCode(
     @Body(ValidationPipe) generateQrCodeDto: GenerateQrCodeDto,
@@ -54,13 +52,11 @@ export class UrlController {
     return this.urlService.generateQrCode(shortUrl, request);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('user/:userId')
   async getLinkHistory(@Param('userId') userId: string) {
     return this.urlService.getLinkHistory(userId);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Post('customize-short-url')
   async customizeShortUrl(
     @Body(ValidationPipe) customizeShortUrlDto: CustomizeShortUrlDto,
@@ -83,7 +79,6 @@ export class UrlController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('analytics/:linkId')
   async getLinkAnalytics(@Param('linkId') linkId: string): Promise<Url> {
     return this.urlService.getLinkAnalytics(linkId)
